@@ -93,14 +93,14 @@ SearchMarkedText( SearchURL := "Not entered" ) {
     if (StrLen(SearchURL) > 10)
     {
       ClipSaved := ClipboardAll
-      Clipboard =                                                  ; Start off empty to allow ClipWait to detect when the text has arrived.
+      Clipboard =                                                   ; Start off empty to allow ClipWait to detect when the text has arrived.
       Send ^c
-      ClipWait,5  							                                   ; Wait for 5 seconds or until the clipboard contains text.
-      if ErrorLevel{						                                   ; If it fails
+      ClipWait,5                                                    ; Wait for 5 seconds or until the clipboard contains text.
+      if ErrorLevel{                                                ; If it fails
         MsgBox , , Function Error: 004, No data was made available in clipboard`nScript waited for 5 seconds got no data`nRemember to mark the text you need search.  
-                                                                   ; ^^ Display messagebox
-        Clipboard := ClipSaved					                           ; Restore saved clipboard
-        return								                                     ; Stop Script
+                                                                    ; ^^ Display messagebox
+        Clipboard := ClipSaved                                      ; Restore saved clipboard
+        return                                                      ; Stop Script
       }
       Run %SearchURL%%Clipboard%
       Clipboard := ClipSaved
