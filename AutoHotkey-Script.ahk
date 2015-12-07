@@ -436,16 +436,6 @@ return
 ::l4e::Level 4 Engineer
 ::lalain::Level 3 Engineer Alain Vercammen
 :o:qt::>-----------------<>------------------<{ENTER 2}>-------------------------------------<{UP 2}{RIGHT 19} 
-::transportinfo::
-SendInput >-----------------< Transport information >------------------<{Enter}
-SendInput Name: Anders Olesen{Enter}
-SendInput Phone number: +353 871487456{Enter}
-SendInput E-Mail: a.olesen@gmail.com{Enter}
-SendInput Address:{Enter}
-SendInput 10 Chapel Gate{Enter}
-SendInput St. Alphonsus road{Enter}
-SendInput D09 EP89 – Dublin 9{Enter}
-SendInput >-------------------------------------<
 
 return 
 ::HPTT::http://www.hp.com/support/tapetools
