@@ -95,11 +95,11 @@ SearchMarkedText( SearchURL := "Not entered" ) {
       ClipSaved := ClipboardAll
       Clipboard =                       ; Start off empty to allow ClipWait to detect when the text has arrived.
       Send ^c
-      ClipWait,5  							                                       		; Wait for 5 seconds or until the clipboard contains text.
-      if ErrorLevel{						                                      			; If it fails
+      ClipWait,5  							                                   ; Wait for 5 seconds or until the clipboard contains text.
+      if ErrorLevel{						                                   ; If it fails
         MsgBox , , Function Error: 004, No data was made available in clipboard`nScript waited for 5 seconds got no data`nRemember to mark the text you need search.  ;Display messagebox
-        Clipboard := ClipSaved					                                    	; Restore saved clipboard
-        return								                                    		; Stop Script
+        Clipboard := ClipSaved					                           ; Restore saved clipboard
+        return								                                     ; Stop Script
       }
       Run %SearchURL%%Clipboard%
       Clipboard := ClipSaved
@@ -190,9 +190,9 @@ SendInput ^c                                                                    
 ClipWait,5                                                                          ; Wait 5 for Clipboard to fill up
 if ErrorLevel                                                                       ; If it fails
 {
-  MsgBox, No data avaialble for the clipboard, remember to mark the text you need.	; Display messagebox
-  Clipboard := ClipSaved								                            ; Restore saved clipboard
-  return										                                    ; Stop Script
+  MsgBox, No data avaialble for the clipboard, remember to mark the text you need.  ; Display messagebox
+  Clipboard := ClipSaved								                                            ; Restore saved clipboard
+  return										                                                        ; Stop Script
 }
 else
 {
@@ -229,20 +229,20 @@ return
 
 ^#n::
 ClipSaved := ClipboardAll
-Clipboard =                         ; Start off empty to allow ClipWait to detect when the text has arrived.
+Clipboard =                 ; Start off empty to allow ClipWait to detect when the text has arrived.
 Send ^c
-ClipWait,1  						; Wait for 5 seconds or until the clipboard contains text.
-if ErrorLevel						; If it fails
+ClipWait,1  						    ; Wait for 5 seconds or until the clipboard contains text.
+if ErrorLevel						    ; If it fails
 {
-  Clipboard := ClipSaved			; Restore saved clipboard
-  return							; Stop Script
+  Clipboard := ClipSaved	  ; Restore saved clipboard
+  return							      ; Stop Script
 }
 Run notepad.exe
 WinWait, Untitled - Notepad, , 1
 if ErrorLevel
 {
-  Clipboard := ClipSaved			; Restore saved clipboard
-  return							; Stop Script
+  Clipboard := ClipSaved	  ; Restore saved clipboard
+  return							      ; Stop Script
 }
  IfWinExist, Untitled - Notepad
     WinActivate 
@@ -251,27 +251,27 @@ Clipboard := ClipSaved
 ClipSaved =
 return
 
-#d::						; When Winkey + d is pressed
-ClipSaved := ClipboardAll	; Save current clipboard to variable
-Clipboard =  				; Empty cliboard
-Send ^c						; Send Control+C (Copy)
-ClipWait,5  				; Wait for 5 seconds or until the clipboard contains text.
-if ErrorLevel				; If it fails
+#d::						            ; When Winkey + d is pressed
+ClipSaved := ClipboardAll	  ; Save current clipboard to variable
+Clipboard =  				        ; Empty cliboard
+Send ^c						          ; Send Control+C (Copy)
+ClipWait,5  				        ; Wait for 5 seconds or until the clipboard contains text.
+if ErrorLevel				        ; If it fails
 {
   MsgBox, No data avaialble for the clipboard, remember to mark the text you need.	;Display messagebox
-  Clipboard := ClipSaved					                                    	; Restore saved clipboard
-  return								                                    		; Stop Script
+  Clipboard := ClipSaved					                                     ; Restore saved clipboard
+  return								                                    		       ; Stop Script
 }
-Link = %Clipboard%						                                    		; Put clipboard into link variable
-Clipboard := ClipSaved						                                    	; Restore saved clipboard
-ClipSaved =										                                    ; Clear saved clipboard
-DFilename =									                                    	; Make variable for filename only 
-SplitPath, Link, DFilename						                                    ; Get filename from link
-Dpath = C:\Users\olesena\Documents\Reports\AutoHotkey Logs\				            ; Download path
-MsgBox, 0, Auto-open file, File is being downloaded and opened..., 1			    ; Display messagebox
-UrlDownloadToFile, %Link%, %Dpath%%DFilename%					                   	; Download the file
-run "%Dpath%%DFilename%"								                            ; Open the file
-return										                                    	; Stop script
+Link = %Clipboard%						                                    		 ; Put clipboard into link variable
+Clipboard := ClipSaved						                                     ; Restore saved clipboard
+ClipSaved =										                                         ; Clear saved clipboard
+DFilename =									                                    	     ; Make variable for filename only 
+SplitPath, Link, DFilename						                                 ; Get filename from link
+Dpath = C:\Users\olesena\Documents\Reports\AutoHotkey Logs\				     ; Download path
+MsgBox, 0, Auto-open file, File is being downloaded and opened..., 1	 ; Display messagebox
+UrlDownloadToFile, %Link%, %Dpath%%DFilename%					                 ; Download the file
+run "%Dpath%%DFilename%"								                               ; Open the file
+return										                                    	       ; Stop script
 
 ; >>>>>>>>>>>>>>>>>>
 ; >>> Note maker >>>
