@@ -1,4 +1,3 @@
-
 #SingleInstance force
 #InstallKeybdHook
 SetTitleMatchMode 2
@@ -208,7 +207,6 @@ else
 ; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 ; <<< Second Opinion helper end <<<
 ; <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
 
 ; >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ; >>> Search helpers start >>>
