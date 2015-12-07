@@ -21,5 +21,3 @@ Autohotkey is quite powerful and can easily mess up a lot of things, so be caref
 using any scripts, that also goes for mine, they are not infalible.
 
 Hope you like it.
-
-
