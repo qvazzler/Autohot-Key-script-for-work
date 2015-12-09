@@ -192,8 +192,8 @@ ClipWait,5                  ; Wait 5 for Clipboard to fill up
 if ErrorLevel               ; If it fails
 {
   MsgBox, No data avaialble for the clipboard, remember to mark the text you need.  ; Display messagebox
-  Clipboard := ClipSaved								                                            ; Restore saved clipboard
-  return										                                                        ; Stop Script
+  Clipboard := ClipSaved                                                            ; Restore saved clipboard
+  return                                                                            ; Stop Script
 }
 else
 {
