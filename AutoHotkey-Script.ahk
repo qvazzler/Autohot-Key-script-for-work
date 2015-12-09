@@ -229,21 +229,21 @@ SendInput %CaseID%      ; Type case number
 return
 
 ^#n::
-ClipSaved := ClipboardAll
+ClipSaved := ClipboardAll         ; Save current clipboard
 Clipboard =                       ; Start off empty to allow ClipWait to detect when the text has arrived.
 Send ^c                           ; Press Control C (Copy)
-ClipWait,1  						          ; Wait for 5 seconds or until the clipboard contains text.
-if ErrorLevel						          ; If it fails
+ClipWait,1                        ; Wait for 5 seconds or until the clipboard contains text.
+if ErrorLevel                     ; If it fails
 {
-  Clipboard := ClipSaved	        ; Restore saved clipboard
-  return							            ; Stop Script
+  Clipboard := ClipSaved          ; Restore saved clipboard
+  return                          ; Stop Script
 }
 Run notepad.exe                   ; Open notepad
 WinWait, Untitled - Notepad, , 1  ; Wait until notepad is active
 if ErrorLevel
 {
-  Clipboard := ClipSaved	        ; Restore saved clipboard
-  return							            ; Stop Script
+  Clipboard := ClipSaved          ; Restore saved clipboard
+  return                          ; Stop Script
 }
  IfWinExist, Untitled - Notepad   ; If there is an untitled notepad
     WinActivate                   ; Then use that instead
@@ -252,12 +252,12 @@ Clipboard := ClipSaved            ; Restore saved clipboard to current clipboard
 ClipSaved =                       ; Empty the savedclipboard variable
 return
 
-#d::						            ; When Winkey + d is pressed
-ClipSaved := ClipboardAll	  ; Save current clipboard to variable
-Clipboard =  				        ; Empty cliboard
-Send ^c						          ; Send Control+C (Copy)
-ClipWait,5  				        ; Wait for 5 seconds or until the clipboard contains text.
-if ErrorLevel				        ; If it fails
+#d::                        ; When Winkey + d is pressed
+ClipSaved := ClipboardAll   ; Save current clipboard to variable
+Clipboard =                 ; Empty cliboard
+Send ^c                     ; Send Control+C (Copy)
+ClipWait,5                  ; Wait for 5 seconds or until the clipboard contains text.
+if ErrorLevel               ; If it fails
 {
   MsgBox, No data avaialble for the clipboard, remember to mark the text you need.	;Display messagebox
   Clipboard := ClipSaved					                                     ; Restore saved clipboard
