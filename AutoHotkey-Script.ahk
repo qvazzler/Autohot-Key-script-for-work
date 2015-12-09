@@ -259,20 +259,20 @@ Send ^c                     ; Send Control+C (Copy)
 ClipWait,5                  ; Wait for 5 seconds or until the clipboard contains text.
 if ErrorLevel               ; If it fails
 {
-  MsgBox, No data avaialble for the clipboard, remember to mark the text you need.	;Display messagebox
-  Clipboard := ClipSaved					                                     ; Restore saved clipboard
-  return								                                    		       ; Stop Script
+  MsgBox, No data avaialble for the clipboard, remember to mark the text you need.  ; Display messagebox
+  Clipboard := ClipSaved                                                            ; Restore saved clipboard
+  return                                                                            ; Stop Script
 }
-Link = %Clipboard%						                                    		 ; Put clipboard into link variable
-Clipboard := ClipSaved						                                     ; Restore saved clipboard
-ClipSaved =										                                         ; Clear saved clipboard
-DFilename =									                                    	     ; Make variable for filename only 
-SplitPath, Link, DFilename						                                 ; Get filename from link
-Dpath = C:\Users\olesena\Documents\Reports\AutoHotkey Logs\				     ; Download path
-MsgBox, 0, Auto-open file, File is being downloaded and opened..., 1	 ; Display messagebox
-UrlDownloadToFile, %Link%, %Dpath%%DFilename%					                 ; Download the file
-run "%Dpath%%DFilename%"								                               ; Open the file
-return										                                    	       ; Stop script
+Link = %Clipboard%                                                                  ; Put clipboard into link variable
+Clipboard := ClipSaved                                                              ; Restore saved clipboard
+ClipSaved =                                                                         ; Clear saved clipboard
+DFilename =                                                                         ; Make variable for filename only 
+SplitPath, Link, DFilename                                                          ; Get filename from link
+Dpath = C:\Users\olesena\Documents\Reports\AutoHotkey Logs\                         ; Download path
+MsgBox, 0, Auto-open file, File is being downloaded and opened..., 1                ; Display messagebox
+UrlDownloadToFile, %Link%, %Dpath%%DFilename%                                       ; Download the file
+run "%Dpath%%DFilename%"                                                            ; Open the file
+return                                                                              ; Stop script
 
 ; >>>>>>>>>>>>>>>>>>
 ; >>> Note maker >>>
