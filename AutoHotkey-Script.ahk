@@ -29,11 +29,11 @@ return
 ; >>> Functions >>>
 ; >>>>>>>>>>>>>>>>>
 CaseNumber(){
-  DetectHiddenText, off
-  WinGetText, SRDWinText, SR-Dash
-  CaseNPos := InStr(SRDWinText, "Case Notes: ", false, 1, 1)
-  CaseNumber := SubStr(SRDWinText,CaseNPos+12,10)
-  return %CaseNumber%
+  DetectHiddenText, off                                       ; Make it so we can spot hidden text
+  WinGetText, SRDWinText, SR-Dash                             ; Grab all windows test from SR-Dash
+  CaseNPos := InStr(SRDWinText, "Case Notes: ", false, 1, 1)  ; Find the position of "Case Notes: " in the grabbed SR-Dash text
+  CaseNumber := SubStr(SRDWinText,CaseNPos+12,10)             ; Get only the case number out of the grabbed text, using the position
+  return %CaseNumber%                                         ; Send back the case number
 }
 
 URLDownloadToVar( URL ) {
