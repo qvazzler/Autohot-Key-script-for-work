@@ -92,15 +92,15 @@ SearchMarkedText( SearchURL := "Not entered" ) {
   { 
     if (StrLen(SearchURL) > 10)
     {
-      ClipSaved := ClipboardAll
-      Clipboard =                                                   ; Start off empty to allow ClipWait to detect when the text has arrived.
-      Send ^c
-      ClipWait,5                                                    ; Wait for 5 seconds or until the clipboard contains text.
-      if ErrorLevel{                                                ; If it fails
+      ClipSaved := ClipboardAll     ; Save the current clipboard
+      Clipboard =                   ; Start off empty to allow ClipWait to detect when the text has arrived.
+      Send ^c                       ; Send control - C (Copy)
+      ClipWait,5                    ; Wait for 5 seconds or until the clipboard contains text.
+      if ErrorLevel{                ; If it fails
         MsgBox , , Function Error: 004, No data was made available in clipboard`nScript waited for 5 seconds got no data`nRemember to mark the text you need search.  
-                                                                    ; ^^ Display messagebox
-        Clipboard := ClipSaved                                      ; Restore saved clipboard
-        return                                                      ; Stop Script
+                                    ; ^^ Display messagebox
+        Clipboard := ClipSaved      ; Restore saved clipboard
+        return                      ; Stop Script
       }
       Run %SearchURL%%Clipboard%
       Clipboard := ClipSaved
@@ -161,35 +161,35 @@ return
 ; >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #IfWinActive ahk_class WindowsForms10.Window.8.app.0.218f99c
 #2::
- ClipSaved := ClipboardAll ;Save the clipboard as it is now
- Clipboard =  ; Start off empty to allow ClipWait to detect when the text has arrived.
- CaseID := CaseNumber()
- WinActivate NER HPSD L1 Nearline
- WinWait, NER HPSD L1 Nearline
- SendInput %CaseID% - SO Needed -{Space}
- Clipboard := ClipSaved
- ClipSaved =
+ ClipSaved := ClipboardAll                ; Save the clipboard as it is now
+ Clipboard =                              ; Start off empty to allow ClipWait to detect when the text has arrived.
+ CaseID := CaseNumber()                   ; Get the case number from the current case
+ WinActivate NER HPSD L1 Nearline         ; Bring the Chat room to the forefront
+ WinWait, NER HPSD L1 Nearline            ; Wait for it to be active
+ SendInput %CaseID% - SO Needed -{Space}  ; Put in CaseID and standard text
+ Clipboard := ClipSaved                   ; Restore saved clipboard
+ ClipSaved =                              ; Empty savedclipboard variable
 return
 
 ^2::
-ClipSaved := ClipboardAll ;Save the clipboard as it is now
-Clipboard =  ; Start off empty to allow ClipWait to detect when the text has arrived.
-CaseID := CaseNumber()
-WinActivate NER HPSD L1 Nearline
-WinWait, NER HPSD L1 Nearline
-SendInput %CaseID% - Done
-Clipboard := ClipSaved
-ClipSaved =
+ClipSaved := ClipboardAll         ; Save the clipboard as it is now
+Clipboard =                       ; Start off empty to allow ClipWait to detect when the text has arrived.
+CaseID := CaseNumber()            ; Get the case number from the current case
+WinActivate NER HPSD L1 Nearline  ; Bring the Chat room to the forefront
+WinWait, NER HPSD L1 Nearline     ; Wait for it to be active
+SendInput %CaseID% - Done         ; Put in CaseID and standard end text
+Clipboard := ClipSaved            ; Restore saved clipboard
+ClipSaved =                       ; Empty savedclipboard variable
 return
 #IfWinActive
 
 #IfWinActive NER HPSD L1 Nearline
 ^2::
-ClipSaved := ClipboardAll                                                           ; Save the clipboard as it is now
-Clipboard =                                                                         ; Start off empty to allow ClipWait to detect when the text has arrived.
-SendInput ^c                                                                        ; Press Control C (Copy)
-ClipWait,5                                                                          ; Wait 5 for Clipboard to fill up
-if ErrorLevel                                                                       ; If it fails
+ClipSaved := ClipboardAll   ; Save the clipboard as it is now
+Clipboard =                 ; Start off empty to allow ClipWait to detect when the text has arrived.
+SendInput ^c                ; Press Control C (Copy)
+ClipWait,5                  ; Wait 5 for Clipboard to fill up
+if ErrorLevel               ; If it fails
 {
   MsgBox, No data avaialble for the clipboard, remember to mark the text you need.  ; Display messagebox
   Clipboard := ClipSaved								                                            ; Restore saved clipboard
@@ -197,11 +197,11 @@ if ErrorLevel                                                                   
 }
 else
 {
-  Send {Shift Down}{Tab 1}{Shift Up}^a^v{Space}-{Space}Checking...
-  SendInput {Enter}
-  WinActivate ahk_class WindowsForms10.Window.8.app.0.218f99c
-  WinWait, ahk_class WindowsForms10.Window.8.app.0.218f99c
-  SendInput {Alt Down}a{Alt Up}
+  Send {Shift Down}{Tab 1}{Shift Up}^a^v{Space}-{Space}Checking...  ; Put in text to chat room
+  SendInput {Enter}                                                 ; Send the text
+  WinActivate ahk_class WindowsForms10.Window.8.app.0.218f99c       ; Activate the SR-Dash window
+  WinWait, ahk_class WindowsForms10.Window.8.app.0.218f99c          ; Wait for the SR-Dash window to be active
+  SendInput {Alt Down}a{Alt Up}                                     ; Alt + A
   return
 }
 #IfWinActive
@@ -224,32 +224,32 @@ else
 ; <<<<<<<<<<<<<<<<<<<<<<<<<
 
 ^#c::
-CaseID := CaseNumber()
-SendInput %CaseID%
+CaseID := CaseNumber()  ; Get case number
+SendInput %CaseID%      ; Type case number
 return
 
 ^#n::
 ClipSaved := ClipboardAll
-Clipboard =                 ; Start off empty to allow ClipWait to detect when the text has arrived.
-Send ^c
-ClipWait,1  						    ; Wait for 5 seconds or until the clipboard contains text.
-if ErrorLevel						    ; If it fails
+Clipboard =                       ; Start off empty to allow ClipWait to detect when the text has arrived.
+Send ^c                           ; Press Control C (Copy)
+ClipWait,1  						          ; Wait for 5 seconds or until the clipboard contains text.
+if ErrorLevel						          ; If it fails
 {
-  Clipboard := ClipSaved	  ; Restore saved clipboard
-  return							      ; Stop Script
+  Clipboard := ClipSaved	        ; Restore saved clipboard
+  return							            ; Stop Script
 }
-Run notepad.exe
-WinWait, Untitled - Notepad, , 1
+Run notepad.exe                   ; Open notepad
+WinWait, Untitled - Notepad, , 1  ; Wait until notepad is active
 if ErrorLevel
 {
-  Clipboard := ClipSaved	  ; Restore saved clipboard
-  return							      ; Stop Script
+  Clipboard := ClipSaved	        ; Restore saved clipboard
+  return							            ; Stop Script
 }
- IfWinExist, Untitled - Notepad
-    WinActivate 
-Send ^v
-Clipboard := ClipSaved
-ClipSaved =
+ IfWinExist, Untitled - Notepad   ; If there is an untitled notepad
+    WinActivate                   ; Then use that instead
+Send ^v                           ; Paste in stuff from the clipboard
+Clipboard := ClipSaved            ; Restore saved clipboard to current clipboard
+ClipSaved =                       ; Empty the savedclipboard variable
 return
 
 #d::						            ; When Winkey + d is pressed
