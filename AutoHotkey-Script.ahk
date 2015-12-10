@@ -36,32 +36,32 @@ CaseNumber(){
   return %CaseNumber%                                         ; Send back the case number
 }
 
-URLDownloadToVar( URL ) {
- WebRequest := ComObjCreate("WinHttp.WinHttpRequest.5.1")
- WebRequest.Open("GET", URL)
- WebRequest.Send()
- return WebRequest.ResponseText
+URLDownloadToVar( URL ) {     
+ WebRequest := ComObjCreate("WinHttp.WinHttpRequest.5.1")     ; Create a new HTTP Request object
+ WebRequest.Open("GET", URL)                                  ; Open the new object and add the functions URL
+ WebRequest.Send()                                            ; Send the request with the customer URL
+ return WebRequest.ResponseText                               ; Send back the result of the HTTP Request based on the URL in the function call
 }
 
 NextFollowUpDateTime( Amountofdays := 1 ) {
-  if Amountofdays between 1 and 6     
+  if Amountofdays between 1 and 6                                     ; Evaluate the variable Amountofdays, is between 1 and 6
   {
-    NFDT_Parsed =
-    NFDT_Final =
-    EvaluationDay = 
-    while Amountofdays > 0 
+    NFDT_Parsed =                                                     ; Empty/Initialize NFDT_Parsed
+    NFDT_Final =                                                      ; Empty/Initialize NFDT_Final
+    EvaluationDay =                                                   ; Empty/Initialize EvaluationDay 
+    while Amountofdays > 0                                            ; Repeat the following code as long as Amountofdays is more than 0
     {
-      Weekday = 
-      EvaluationDay += 1, days
-      FormatTime, Weekday, %EvaluationDay%, WDay
-      if Weekday between 2 and 6 
-      {
-        Amountofdays--
-      }
+      Weekday =                                                       ; Empty/Initialize Weekday
+      EvaluationDay += 1, days                                        ; Add one day to the variable Evaluation day
+      FormatTime, Weekday, %EvaluationDay%, WDay                      ; Get the weekday from the varialble Evaludation day and put it into Weekday
+      if Weekday between 2 and 6                                      ; Is the day we are evaluating is a workday then...
+      {                                                               ; (Days numbered 1 and 7 are Sunday and Saturday repectively)
+        Amountofdays--                                                ; ... substract one from Amountofdays
+      }                                                               ; (So if evaluation day was a weekend day, then no Amountofdays was substracted)
     }
-    FormatTime, NFDT_Parsed, %EvaluationDay% L1033, dddd dd-MM-yy
-    NFDT_Final = Next Follow-up Date/Time: %NFDT_Parsed% 13:00 GMT
-    return NFDT_Final
+    FormatTime, NFDT_Parsed, %EvaluationDay% L1033, dddd dd-MM-yy     ; Date date from the variable evaluation day and put the full date into NFDT_Parsed
+    NFDT_Final = Next Follow-up Date/Time: %NFDT_Parsed% 13:00 GMT    ; Stitch the text together with the date we got
+    return NFDT_Final                                                 ; Return the NFDT with test and all
   } 
   else 
   {
