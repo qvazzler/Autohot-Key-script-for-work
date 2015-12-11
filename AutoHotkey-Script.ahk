@@ -78,12 +78,12 @@ GetHPSupportPassword() {
   return GeneratedPassword
 }
  
-PrintHPSupportPassword( TextInFront := "" ) {
- HPSupportPassword := GetHPSupportPassword()
- SetKeyDelay, 50
- Send %TextInFront%%HPSupportPassword%
- SetKeyDelay, 0
- return
+PrintHPSupportPassword( TextInFront := "" ) {   ; Initialize function with Received text
+ HPSupportPassword := GetHPSupportPassword()    ; Get HP Support password for today
+ SetKeyDelay, 50                                ; Set the key to key delay to 25 milliseconds
+ Send %TextInFront%%HPSupportPassword%          ; Write out the HP Support Password (Optionally with text in front
+ SetKeyDelay, 0                                 ; Remove the key to key delay
+ return                                         ; End function
 }
 
 SearchMarkedText( SearchURL := "Not entered" ) {
@@ -114,8 +114,10 @@ SearchMarkedText( SearchURL := "Not entered" ) {
     ; Fail condition - does not contain the string "http"
     if (SearchURL = "Not entered")
     {
+      ; Fail condition - There was no Search URL entered at all
       MsgBox , , Function Error: 003, Search URL has not been entered at all`n`nPlease re-write the code executing this funciton
     } else {
+      ; Fail condition - Something was entered in the SearchURL variable, but it did not contain HTTP
       MsgBox , , Function Error: 002, Search URL is malformed`nContains: [%SearchURL%]`n`nPlease re-write the code executing this function  
     }
   }
@@ -468,7 +470,7 @@ return
 ::atm::at the moment
 ::ccl::Case is okay to close.
 ::incall::I'm busy with a call at the moment, please write to me for now, and I will answer later.
-::scr1::You will learn that quite a lot of things I say are scripted.. :)
+::scr1::You will learn that quite a lot of things I say are scripted.. :-)
 :C1:fw::Firmware
 :C1:sw::Software
 :C1:pw::Password
