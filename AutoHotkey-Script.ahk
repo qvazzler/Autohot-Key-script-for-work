@@ -65,7 +65,7 @@ NextFollowUpDateTime( Amountofdays := 1 ) {
   } 
   else 
   {
-    MsgBox, NFDT Function used incorrectly - It cannot accept values lower than 1 and higher than 6.
+    MsgBox, NFDT Function used incorrectly - It can only accept integer values between 1 and 6.
   }
 }
 
