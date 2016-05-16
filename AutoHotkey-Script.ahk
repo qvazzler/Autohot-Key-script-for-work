@@ -120,6 +120,57 @@ SearchMarkedText( SearchURL := "Not entered" ) {
     }
   }
 }
+
+Outlook_NextFollowUpDateTime( Amountofdays := 1 ) {
+  if Amountofdays between 1 and 6     
+  {
+    while Amountofdays > 0 
+    {
+      EvaluationDay += 1, days
+      FormatTime, Weekday, %EvaluationDay%, WDay
+      if Weekday between 2 and 6 
+        Amountofdays--
+    }
+    FormatTime, NFDT_Parsed, %EvaluationDay%, yyyy/M/d
+    return NFDT_Parsed
+  } 
+  else if Amountofdays = 0
+  {
+    FormatTime, NFDT_Parsed, %EvaluationDay%, yyyy/M/d
+    return NFDT_Parsed
+  }
+  else 
+    MsgBox , , Error in function call, Outlook NFDT Function used incorrectly`nIt can only accept integer values between 0 and 6`n`nPlease reprogram the function call.`n`nAmount of days: %Amountofdays%
+}
+
+
+VBScript_OutlookNewAppointment( Amountofdaystowait := 1 )
+{
+  VB_Script_CaseNumber := CaseNumber()
+  VB_Script_Appointment_Date := Outlook_NextFollowUpDateTime(Amountofdaystowait)
+    
+  VBScript_OutlookNewAppointment =
+  (
+  Sub NewOutlookAppointment()
+    Const olAppointmentItem = 1
+    Const olRecursWeekly = 1
+    Set objOutlook = CreateObject("Outlook.Application")
+    Set objAppointment = objOutlook.CreateItem(olAppointmentItem)
+    objAppointment.Start = #%VB_Script_Appointment_Date% 9:0#
+    objAppointment.Duration = 15
+    objAppointment.Subject = "Call back - Case: %VB_Script_CaseNumber%"
+    objAppointment.Body = "Call back reminder. Case: %VB_Script_CaseNumber%"
+    objAppointment.Location = ""
+    objAppointment.ReminderMinutesBeforeStart = 0
+    objAppointment.ReminderSet = True
+    objAppointment.Save
+  End Sub
+  )
+ ; Preamble - ScriptControl requires a 32-bit version of AutoHotkey.
+ sc := ComObjCreate("ScriptControl"), sc.Language := "VBScript", sc.AddCode(VBScript_OutlookNewAppointment)
+ sc.Run("NewOutlookAppointment")
+}
+
 ; <<<<<<<<<<<<<<<<<
 ; <<< Functions <<<
 ; <<<<<<<<<<<<<<<<<
