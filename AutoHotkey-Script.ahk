@@ -85,7 +85,7 @@ PrintHPSupportPassword( TextInFront := "" ) {   ; Initialize function with Recei
 }
 
 SearchMarkedText( SearchURL := "Not entered" ) {
-  ;Check if the variables have been filled in right
+  ;Check if the variables have been filled in right, because you wouldn't want them to be wrong, you know
   IfInString, SearchURL, http
   { 
     if (StrLen(SearchURL) > 10)
